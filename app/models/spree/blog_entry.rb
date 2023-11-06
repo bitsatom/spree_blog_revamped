@@ -1,9 +1,11 @@
 require 'acts-as-taggable-on'
 
-class Spree::BlogEntry < ActiveRecord::Base
+class Spree::BlogEntry < ActiveRecord::Base  
   acts_as_taggable_on :tags, :categories
   before_save :create_permalink
   before_save :set_published_at
+  before_save :set_author
+
   validates_presence_of :title
   validates_presence_of :body
 
@@ -17,7 +19,9 @@ class Spree::BlogEntry < ActiveRecord::Base
     belongs_to :author
   end
 
-  has_one :blog_entry_image, :as => :viewable, :dependent => :destroy, :class_name => 'Spree::BlogEntryImage'
+
+  has_one :blog_entry_image, :as => :viewable, :dependent => :destroy, class_name: 'Spree::BlogEntryImage'
+
   accepts_nested_attributes_for :blog_entry_image, :reject_if => :all_blank
 
   def entry_summary(chars=200)
@@ -75,11 +79,16 @@ class Spree::BlogEntry < ActiveRecord::Base
   end
 
   def create_permalink
-    self.permalink = title.to_url if permalink.blank?
+    # self.permalink = title.to_url if permalink.blank?
+    self.permalink = title.to_s.parameterize if permalink.blank?
   end
 
   def set_published_at
     self.published_at = Time.now if published_at.blank?
+  end
+
+  def set_author
+    self.author_id = current_user.id if  author_id.blank?
   end
 
   def validate

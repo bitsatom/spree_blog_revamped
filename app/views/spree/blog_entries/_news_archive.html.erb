@@ -5,14 +5,12 @@
       <% d = DateTime.parse("1/#{year}") %>
 
       <li> <span></span>
-        <%= link_to(year, blog_archive_path(:year => d.year)) %>
-
+        <%= year %>
         <ul class="months">
           <% months_with_entries.each do |month, entries| %>
             <% d = DateTime.parse("#{year}, #{month}") %>
-
             <li> <span></span>
-              <%= link_to I18n.l(d, :format => "%B"), blog_archive_path(:year => d.year, :month => d.month) %>
+              <%= I18n.l(d, :format => "%B") %>
 
               <ul class="posts">
                 <% entries.each do |entry| %>
@@ -20,7 +18,6 @@
                 <% end %>
               </ul>
             </li>
-
           <% end %>
         </ul>
       </li>

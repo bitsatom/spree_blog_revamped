@@ -1,7 +1,13 @@
-<h1><%= Spree.t(:blog_tag) %>: <%= @tag_name %></h1>
+<div class="container ml-4 mt-4">
+  <div class="row">
+    <div class="col-3">
+      <%= render :partial => 'spree/blog_entries/blog_sidebar' %>
+    </div>
+    <div class="col-9">
+      <h1><%= Spree.t(:blog_tag) %>: <%= @tag_name %></h1>
+      <%= render :partial => 'spree/blog_entries/blog_entries' %>
+      <%= button_link_to Spree.t(:back_to_blog_list), :back, { class: "btn-success back-btn", icon: 'arrow-left' } %>
 
-<%= render :partial => 'spree/blog_entries/blog_entries' %>
-
-<% content_for :sidebar do %>
-  <%= render :partial => 'spree/blog_entries/sidebar_index' %>
-<% end %>
+    </div>
+  </div>
+</div>

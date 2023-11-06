@@ -1,4 +1,4 @@
-SpreeBloggingSpree
+SpreeBlogRevamped
 ==================
 
 [![Build Status](https://travis-ci.org/stefansenk/spree-blogging-spree.png?branch=master)](https://travis-ci.org/stefansenk/spree-blogging-spree)
